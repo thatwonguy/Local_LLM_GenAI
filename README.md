@@ -10,7 +10,7 @@ A Chatbot application that uses open-source LLMs for chatting that can be used f
 
 To get started with this project:  
 1. Have python installed on your machine (version 3.6 or above).
-2. Install the necessary packages by running:
+2. Install the necessary packages by running the following in a virtual environment preferably:
 ```
 pip install -r requirements.txt
 ```

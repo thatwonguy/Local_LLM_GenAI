@@ -3,6 +3,8 @@ A Chatbot application that uses open-source LLMs for chatting that can be used f
 
 ## Prerequisites
 ### This repo assumes you already have Ollama and a model installed.
+1. You have to go to https://ollama.com/ and download and install ollama software on your local machine.
+2. Once it is installed you need to select a model to install from the following url on your local machine: https://ollama.com/library.
 
 To get started with this project:  
 1. Have python installed on your machine (version 3.6 or above).

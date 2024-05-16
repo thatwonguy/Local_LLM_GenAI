@@ -4,7 +4,7 @@ This solution needs internet access to use api calls through the ollama software
 ## Prerequisites
 ### This repo assumes you already have Ollama and a model installed.
 1. You have to go to https://ollama.com/ and download and install ollama software on your local machine.
-2. Once it is installed you need to select a model to install from the following url on your local machine: https://ollama.com/library.
+2. Once it is installed you need to select a model to install from the following url on your local machine: https://ollama.com/library. From this location pick Phi 3, a pretrained model by Microsoft, or feel free to test the other models.
 
 To get started with this project:  
 1. Have python installed on your machine (version 3.6 or above).

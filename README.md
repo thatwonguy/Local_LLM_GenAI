@@ -12,14 +12,20 @@ This solution needs internet access to use api calls through the ollama software
 
 To get started with this project:  
 1. Have python installed on your machine (version 3.6 or above).
-2. Install the necessary packages by running the following in a virtual environment preferably:
-```
-pip install -r requirements.txt
-```
-or
-```
-pip install streamlit ollama
-```
+2. Install the necessary packages by running the following in a virtual environment preferably.
+     - To create a virtual environment with conda type the following:
+          ```
+          conda create -n venv python=3.11
+          ```
+       The above will create a new virtual environment using -named 'venv' and this environment will be python version 3.11.
+      - Next you need to install the required python libraries with the following:
+         ```
+         pip install -r requirements.txt
+         ```
+         or
+         ```
+         pip install streamlit ollama
+         ```
 
 ### Setup Instructions  
 Follow these steps to set up and run the chatbot locally:

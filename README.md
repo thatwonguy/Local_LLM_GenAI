@@ -31,14 +31,11 @@ To get started with this project:
 Follow these steps to set up and run the chatbot locally:
 
 ### Clone Repository  
-Clone this repo to your local machine.
-```
-git clone https://github.com/thatwonguy/Local_LLM_GenAi.git
-```
+1. Clone this repo to your local machine.  
 
 Then navigate into the project directory:
 ```
-cd Local_LLM_Chatbot
+cd Local_LLM_GenAI
 ```
 Execute the following command to start the Chatbot:
 ```

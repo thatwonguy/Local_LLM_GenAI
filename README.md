@@ -33,7 +33,7 @@ Follow these steps to set up and run the chatbot locally:
 ### Clone Repository  
 Clone this repo to your local machine.
 ```
-git clone https://github.com/thatwonguy/Local_LLM_Chatbot.git
+git clone https://github.com/thatwonguy/Local_LLM_GenAi.git
 ```
 
 Then navigate into the project directory:

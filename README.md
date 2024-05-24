@@ -2,10 +2,10 @@
 
 # Local Large Language Model Generative AI ChatBot
 
-[] Don't feel like retraining the outer hidden layers of a pretrained nueral network model?  
-[] Want to train a nueral network model but simply don't have any additional data?  
-[] Have the data but dont have the resources to perform the computations?  
-[] **No matter what, you simply want to have an alternative solution to chatgpt that no one can take away from you once you have it!**  
+[ ] - Don't feel like retraining the outer hidden layers of a pretrained nueral network model?  
+[ ] - Want to train a nueral network model but simply don't have any additional data?  
+[ ] - Have the data but dont have the resources to perform the computations?  
+[ ] - **No matter what, you simply want to have an alternative solution to chatgpt that no one can take away from you once you have it!**  
 
 If you answered yes to the questions above, you are in luck! Keep reading!
 

@@ -1,6 +1,14 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Local Large Language Model Generative AI ChatBot
+
+1. Don't feel like retraining the outer hidden layers of a pretrained nueral network model?
+2. Want to train a nueral network model but simply don't have any additional data?
+3. Have the data but dont have the resources to perform the computations?
+4. No matter what you simply want to have an alternative solution to chatgpt that no one can take away from you once uou have it?!
+
+You are in luck! Keep reading!
+
 This is a localized solution. Once you have downloaded Ollama and the Phi3 model, you no longer need internet access and can always run your very own LLM-ChatGPT-level interactive GenAI ChatBot and get your answers in a localized and isolated manner. This is one unique approach for a Chatbot application that uses open-source LLMs for chatting that can be used for General Chat, Code Generation, and all other use cases of Chatbots like ChatGPT. The response is very fast on a local PC with 16gb DDR4 Ram and an RTX 3060m with Microsoft **Phi3** model.
 
 ## Prerequisites

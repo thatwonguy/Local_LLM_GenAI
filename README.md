@@ -7,7 +7,7 @@
 3. - [X] Have the data but dont have the resources to perform the computations?  
 4. - [X] **No matter what, you simply want to have an alternative solution to chatgpt that no one can take away from you once you have it!**  
 
-If you answered yes to the questions above, you are in luck! Keep reading!
+*If you answered yes to the questions above, you are in luck! Keep reading!*
 
 This is a localized solution. Once you have downloaded Ollama and the Phi3 model, you no longer need internet access and can always run your very own LLM-ChatGPT-level interactive GenAI ChatBot and get your answers in a localized and isolated manner. This is one unique approach for a Chatbot application that uses open-source LLMs for chatting that can be used for General Chat, Code Generation, and all other use cases of Chatbots like ChatGPT. The response is very fast on a local PC with 16gb DDR4 Ram and an RTX 3060m with Microsoft **Phi3** model.
 

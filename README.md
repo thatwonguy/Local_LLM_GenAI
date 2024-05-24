@@ -4,8 +4,8 @@
 
 1. - [X] Don't feel like retraining the outer hidden layers of a pretrained nueral network model?  
 2. - [X] Want to train a nueral network model but simply don't have any additional data?  
-- [X] Have the data but dont have the resources to perform the computations?  
-- [X] **No matter what, you simply want to have an alternative solution to chatgpt that no one can take away from you once you have it!**  
+3. - [X] Have the data but dont have the resources to perform the computations?  
+4. - [X] **No matter what, you simply want to have an alternative solution to chatgpt that no one can take away from you once you have it!**  
 
 If you answered yes to the questions above, you are in luck! Keep reading!
 

@@ -5,26 +5,30 @@ import os
 class TTSService:
     def __init__(self):
         self.engine = pyttsx3.init()
-        # Optional: Adjust voice, rate, and volume
-        # self.engine.setProperty('rate', 150)  # Speed of speech
-        # self.engine.setProperty('volume', 0.9)  # Volume (0.0 to 1.0)
+        self.voices = self.engine.getProperty('voices')
+        self.engine.setProperty('rate', 150)  # Default speed of speech
 
-    def text_to_speech(self, text, language="en"):
+    def get_voices(self):
+        return [{"id": voice.id, "name": voice.name} for voice in self.voices]
+
+    def set_rate(self, rate):
+        self.engine.setProperty('rate', rate)
+
+    def text_to_speech(self, text, voice_id=None, language="en"):
         try:
+            if voice_id:
+                self.engine.setProperty('voice', voice_id)
+            
             temp_file = 'temp_speech.mp3'
-            # Convert text to speech and save as a file
             self.engine.save_to_file(text, temp_file)
             self.engine.runAndWait()
             
-            # Read the file into a buffer
             with open(temp_file, 'rb') as f:
                 audio_bytes = f.read()
             
-            # Create a BytesIO object
             buffer = io.BytesIO(audio_bytes)
             buffer.seek(0)
             
-            # Delete the temporary file
             os.remove(temp_file)
             
             return buffer

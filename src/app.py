@@ -30,6 +30,10 @@ if "show_save_input" not in st.session_state:
     st.session_state["show_save_input"] = False
 if "chat_to_load" not in st.session_state:
     st.session_state["chat_to_load"] = None
+if "selected_voice" not in st.session_state:
+    st.session_state["selected_voice"] = None
+if "speech_rate" not in st.session_state:
+    st.session_state["speech_rate"] = 150
 
 # Initialize Models
 if not st.session_state["model"]:
@@ -111,6 +115,16 @@ with col1:
 with col2:
     stop_button_pressed = st.button("Stop Generation", on_click=stop_generation)
 
+# Add voice selection dropdown and speech rate slider
+voices = tts_service.get_voices()
+voice_options = {voice["name"]: voice["id"] for voice in voices}
+selected_voice = st.selectbox("Choose Voice", list(voice_options.keys()))
+st.session_state["selected_voice"] = voice_options[selected_voice]
+
+speech_rate = st.slider("Speech Rate", min_value=50, max_value=200, value=150)
+st.session_state["speech_rate"] = speech_rate
+tts_service.set_rate(st.session_state["speech_rate"])
+
 if prompt:
     st.session_state["stop_generation"] = False
     # Add user message to history
@@ -132,7 +146,7 @@ if prompt:
         st.session_state["messages"].append({"role": "assistant", "content": full_response})
 
         # Generate TTS for assistant's response and store it
-        audio_buffer = tts_service.text_to_speech(full_response)
+        audio_buffer = tts_service.text_to_speech(full_response, voice_id=st.session_state["selected_voice"])
         if audio_buffer:
             audio_bytes = audio_buffer.read()
             st.session_state["messages"][-1]["audio"] = base64.b64encode(audio_bytes).decode('utf-8')

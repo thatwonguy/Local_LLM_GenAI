@@ -1,5 +1,15 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # Local Large Language Model Generative AI ChatBot
-This is a localized solution. Once you have downloaded Ollama and the Phi3 model, you no longer need internet access and can always run your very own LLM-ChatGPT-level interactive GenAI ChatBot and get your answers in a localized and isolated manner. This is one unique approach for a Chatbot application that uses open-source LLMs for chatting that can be used for General Chat, Code Generation, and all other use cases of Chatbots like ChatGPT. The response is very fast on a local PC with 16gb DDR4 Ram and an RTX 3060m with Microsoft **Phi3** model. The dolphin model is the most uncensored version available and will more likely answer questions that other models won't answer.
+
+1. - [X] Don't feel like retraining the outer hidden layers of a pretrained nueral network model?  
+2. - [X] Want to train a nueral network model but simply don't have any additional data?  
+3. - [X] Have the data but dont have the resources to perform the computations?  
+4. - [X] **No matter what, you simply want to have an alternative solution to chatgpt that no one can take away from you once you have it!**  
+
+*If you answered yes to the questions above, you are in luck! Keep reading!*
+
+This is a localized solution with a streamlit UI wrapped around it. Once you have downloaded Ollama and the Phi3 model, you no longer need internet access and can always run your very own LLM-ChatGPT-level interactive GenAI ChatBot and get your answers in a localized and isolated manner. This is one unique approach for a Chatbot application that uses open-source LLMs for chatting that can be used for General Chat, Code Generation, and all other use cases of Chatbots like ChatGPT. The response is very fast on a local PC with 16gb DDR4 Ram and an RTX 3060m with Microsoft **Phi3** model.
 
 ## Prerequisites
 ### This repo assumes you already have Ollama and a model installed.
@@ -33,12 +43,12 @@ Follow these steps to set up and run the chatbot locally:
 ### Clone Repository  
 Clone this repo to your local machine.
 ```
-git clone https://github.com/thatwonguy/Local_LLM_Chatbot.git
-```
+git clone https://github.com/thatwonguy/Local_LLM_GenAI
+``` 
 
 Then navigate into the project directory:
 ```
-cd Local_LLM_Chatbot
+cd Local_LLM_GenAI
 ```
 Execute the following command to start the Chatbot:
 ```

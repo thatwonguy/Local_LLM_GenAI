@@ -1,19 +1,28 @@
+# app.py
+
 import ollama
 import streamlit as st
-from streamlit import chat_input, chat_message, markdown, selectbox, session_state, title, write
+from tts_service import TTSService
 
 # Initialize Streamlit app
-title("Personal GPT")
+st.title("Personal GPT with Text-to-Speech")
+
+# Initialize TTS model (do this only once)
+@st.cache_resource
+def load_tts_service():
+    return TTSService()
+
+tts_service = load_tts_service()
 
 # Set default session state values
-session_state.setdefault("message", [])
-session_state.setdefault("model", "")
+st.session_state.setdefault("messages", [])
+st.session_state.setdefault("model", "")
 
 # Initialize Models
-if not session_state["model"]:
+if not st.session_state["model"]:
     try:
         models = [model["name"] for model in ollama.list()["models"]]
-        session_state["model"] = selectbox("Choose Model", models)
+        st.session_state["model"] = st.selectbox("Choose Model", models)
     except Exception as e:
         st.error(f"Failed to load models: {e}")
 
@@ -21,8 +30,8 @@ if not session_state["model"]:
 def model_res_gen():
     try:
         stream = ollama.chat(
-            model=session_state["model"],
-            messages=session_state["message"],
+            model=st.session_state["model"],
+            messages=st.session_state["messages"],
             stream=True
         )
         for chunk in stream:
@@ -32,41 +41,44 @@ def model_res_gen():
 
 # Function to display chat messages
 def display_chat_messages():
-    for message in session_state["message"]:
-        with chat_message(message["role"]):
-            markdown(message["content"])
+    for message in st.session_state["messages"]:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
 display_chat_messages()
 
 # Handle new chat input
-def handle_chat_input():
-    if prompt := chat_input("What Up?"):
-        # Add user message to history
-        session_state["message"].append({"role": "user", "content": prompt})
+if prompt := st.chat_input("What's up?"):
+    # Add user message to history
+    st.session_state["messages"].append({"role": "user", "content": prompt})
 
-        with chat_message("user"):
-            markdown(prompt)
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
-        with chat_message("assistant"):
-            try:
-                message = "".join(model_res_gen())
-                markdown(message)
-                session_state["message"].append({"role": "assistant", "content": message})
-            except Exception as e:
-                st.error(f"Error handling chat input: {e}")
-
-handle_chat_input()
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        full_response = ""
+        for chunk in model_res_gen():
+            full_response += chunk
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+        st.session_state["messages"].append({"role": "assistant", "content": full_response})
+        
+        # Add TTS button for assistant's response
+        audio_buffer = tts_service.text_to_speech(full_response)
+        if audio_buffer:
+            st.audio(audio_buffer, format='audio/mp3')
 
 # Function to save current chat
 def save_chat():
-    if "archived_chats" not in session_state:
-        session_state["archived_chats"] = []
-    session_state["archived_chats"].append(session_state["message"])
+    if "archived_chats" not in st.session_state:
+        st.session_state["archived_chats"] = []
+    st.session_state["archived_chats"].append(st.session_state["messages"])
     st.success("Chat saved!")
 
 # Function to start a new chat
 def start_new_chat():
-    session_state["message"] = []
+    st.session_state["messages"] = []
     st.success("Started new chat.")
 
 # Add buttons for saving and starting a new chat
@@ -79,11 +91,11 @@ if st.button("New Chat"):
 def display_archived_chats():
     with st.sidebar:
         st.header("Chat History")
-        if "archived_chats" in session_state:
-            for i, chat in enumerate(session_state["archived_chats"]):
+        if "archived_chats" in st.session_state:
+            for i, chat in enumerate(st.session_state["archived_chats"]):
                 with st.expander(f"Chat {i + 1}"):
                     for message in chat:
-                        with chat_message(message["role"]):
-                            markdown(message["content"])
+                        with st.chat_message(message["role"]):
+                            st.markdown(message["content"])
 
 display_archived_chats()

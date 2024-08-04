@@ -1,2 +1,8 @@
 streamlit
 ollama
+transformers
+soundfile
+torch
+sentencepiece
+requests
+pyttsx3

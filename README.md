@@ -63,12 +63,59 @@ streamlit run app.py
 ```  
 ## Features Overview 
 
-Our chatbot provides various features for an engaging user experience, including:
 
-- **Selecting Models**: Choose from multiple pre-trained OLLAMA models to customize the conversation's tone and style.
-- **Chat History**: View past conversations with options to edit or delete entries.
-- **Saving Chats**: Save individual chat sessions for future reference, allowing users to revisit their interactions.
-- **New Chat**: Initiate fresh conversations with the selected model and save the conversation if desired.
+### Interactive Chat Interface
+- Provides a user-friendly interface to interact with a custom GPT model.
+- Users can input their queries and receive real-time responses from the model.
+
+### Text-to-Speech Integration
+- Converts model responses to speech using the TTSService.
+- Plays audio responses directly within the app for an enhanced user experience.
+
+### Real-time Response Generation
+- Displays model responses in real-time as they are generated.
+- Allows users to stop response generation at any time with a stop button.
+
+### Chat History Management
+- Save and archive chat sessions for future reference.
+- Load previous chats from the sidebar, including text and audio responses.
+- Clearly indicates that archived chats can be loaded by double-clicking.
+
+### Session State Management
+- Utilizes Streamlit's session state to manage chat messages, model selection, and other stateful information.
+- Ensures continuity of the chat session across different interactions.
+
+### Model Selection
+- Allows users to select from a list of available GPT models to interact with.
+- Dynamically loads the selected model for generating responses.
+
+### Stop Button for Response Generation
+- Positioned near the chat input box for easy access.
+- Provides the ability to halt ongoing response generation promptly.
+
+### Audio Playback for Archived Chats
+- Ensures that text-to-speech audio remains available for playback when loading archived chats.
+- Stores audio responses alongside text messages for comprehensive chat history.
+
+### Dynamic UI Updates
+- Uses Streamlit's real-time update capabilities to reflect changes in the chat and UI elements dynamically.
+- Ensures a smooth and interactive user experience without needing to refresh the page.
+
+# How to Use
+
+### Start a Chat
+- Enter your query in the input box and press Enter.
+- The model will generate a response, which will be displayed and spoken aloud.
+
+### Stop Response Generation
+- Press the "Stop Generation" button next to the input box to halt the model's response.
+
+### Save and Load Chats
+- Save the current chat by clicking the "Save Chat" button and entering a name for the chat.
+- Load a saved chat by double-clicking on the chat name in the sidebar.
+
+### Switch Models
+- Select a different GPT model from the dropdown to use a different model for generating responses.
 
 ## Contributing  
 Feel free to contribute to this repository by forking and by a pull request.

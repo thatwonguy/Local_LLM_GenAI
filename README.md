@@ -71,6 +71,7 @@ streamlit run app.py
 ### Text-to-Speech Integration
 - Converts model responses to speech using the TTSService.
 - Plays audio responses directly within the app for an enhanced user experience.
+- Functionality that allows end-user to select different audio generation for both input text and output text.
 
 ### Real-time Response Generation
 - Displays model responses in real-time as they are generated.
@@ -100,6 +101,7 @@ streamlit run app.py
 ### Dynamic UI Updates
 - Uses Streamlit's real-time update capabilities to reflect changes in the chat and UI elements dynamically.
 - Ensures a smooth and interactive user experience without needing to refresh the page.
+- ADA disability and accessibility compliant attempted use of color and modified UI experience. (work in progress for continued improvments)
 
 # How to Use
 

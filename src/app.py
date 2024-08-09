@@ -118,7 +118,7 @@ def stop_generation():
 display_chat_messages()
 
 # Add voice selection dropdowns and speech rate slider
-voices = [{"name": "en-US-Wavenet-D"}, {"name": "en-US-Wavenet-F"}]  # Example voices
+voices = [{"name": "en-US-Wavenet-I"}, {"name": "en-US-Wavenet-F"}]  # Example voices
 voice_options = {voice["name"]: voice["name"] for voice in voices}
 
 input_voice = st.selectbox("Choose Input Voice", list(voice_options.keys()), key="input_voice_selection")

@@ -6,6 +6,23 @@ class TTSService:
         # Initialize the Google Cloud Text-to-Speech client
         self.client = texttospeech.TextToSpeechClient()
 
+    def get_available_voices(self, language_code="en-US"):
+        try:
+            # Fetch the list of available voices
+            response = self.client.list_voices(language_code=language_code)
+            voices = []
+            for voice in response.voices:
+                voices.append({
+                    "name": voice.name,
+                    "language_codes": voice.language_codes,
+                    "ssml_gender": texttospeech.SsmlVoiceGender(voice.ssml_gender).name,
+                    "natural_sample_rate_hertz": voice.natural_sample_rate_hertz,
+                })
+            return voices
+        except Exception as e:
+            print(f"Error fetching available voices: {e}")
+            return []
+
     def text_to_speech(self, text, voice_name="en-US-Wavenet-D", language_code="en-US"):
         try:
             input_text = texttospeech.SynthesisInput(text=text)

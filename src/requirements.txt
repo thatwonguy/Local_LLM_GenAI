@@ -7,3 +7,6 @@ sentencepiece
 requests
 pyttsx3
 gtts
+ibm_watson
+boto3
+google-cloud-texttospeech

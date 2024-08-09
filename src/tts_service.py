@@ -1,37 +1,35 @@
-import pyttsx3
+from google.cloud import texttospeech
 import io
-import os
 
 class TTSService:
     def __init__(self):
-        self.engine = pyttsx3.init()
-        self.voices = self.engine.getProperty('voices')
-        self.engine.setProperty('rate', 130)  # Default speech rate
+        # Initialize the Google Cloud Text-to-Speech client
+        self.client = texttospeech.TextToSpeechClient()
 
-    def get_voices(self):
-        return [{"id": voice.id, "name": voice.name} for voice in self.voices]
-
-    def set_rate(self, rate):
-        self.engine.setProperty('rate', rate)
-
-    def text_to_speech(self, text, voice_id=None):
+    def text_to_speech(self, text, voice_name="en-US-Wavenet-D", language_code="en-US"):
         try:
-            if voice_id:
-                self.engine.setProperty('voice', voice_id)
+            input_text = texttospeech.SynthesisInput(text=text)
 
-            temp_file = 'temp_speech.mp3'
-            self.engine.save_to_file(text, temp_file)
-            self.engine.runAndWait()
+            # Configure the voice request, e.g., language and voice name
+            voice = texttospeech.VoiceSelectionParams(
+                language_code=language_code,
+                name=voice_name
+            )
 
-            with open(temp_file, 'rb') as f:
-                audio_bytes = f.read()
+            # Select the type of audio file you want returned
+            audio_config = texttospeech.AudioConfig(
+                audio_encoding=texttospeech.AudioEncoding.MP3
+            )
 
-            buffer = io.BytesIO(audio_bytes)
-            buffer.seek(0)
+            # Perform the text-to-speech request
+            response = self.client.synthesize_speech(
+                input=input_text, voice=voice, audio_config=audio_config
+            )
 
-            os.remove(temp_file)
+            # Save the audio to a BytesIO object
+            audio_buffer = io.BytesIO(response.audio_content)
+            return audio_buffer
 
-            return buffer
         except Exception as e:
             print(f"Error in text-to-speech conversion: {e}")
             return None

@@ -9,7 +9,7 @@
 
 *If you answered yes to the questions above, you are in luck! Keep reading!*
 
-This is a localized solution with a streamlit UI wrapped around it. Once you have downloaded Ollama and the Phi3 model, you no longer need internet access and can always run your very own LLM-ChatGPT-level interactive GenAI ChatBot and get your answers in a localized and isolated manner. This is one unique approach for a Chatbot application that uses open-source LLMs for chatting that can be used for General Chat, Code Generation, and all other use cases of Chatbots like ChatGPT. The response is very fast on a local PC with 16gb DDR4 Ram and an RTX 3060m with Microsoft **Phi3** model. The dolphin model is the most uncensored version available and will more likely answer questions that other models won't answer.
+This is a localized solution with a streamlit UI wrapped around it. Once you have downloaded Ollama and the Phi3 model, you no longer need internet access and can always run your very own LLM-ChatGPT-level interactive GenAI ChatBot and get your answers in a localized and isolated manner. This is one unique approach for a Chatbot application that uses open-source LLMs for chatting that can be used for General Chat, Code Generation, and all other use cases of Chatbots like ChatGPT. The response is very fast on a local PC with 16gb DDR4 Ram and an RTX 3060m with Microsoft **Phi3** model. The dolphin model, as of 2023, is the most uncensored version available and will more likely answer questions that other models won't answer. If you are reading this in the future, be aware that even better models are likely available now!
 
 Type the following in terminal to get this running:
 

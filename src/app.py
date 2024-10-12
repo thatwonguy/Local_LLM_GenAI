@@ -9,89 +9,6 @@ import base64
 st.set_page_config(page_title="UncensoredGPT with Text-to-Speech", layout="wide")
 st.title("UncensoredGPT with Text-to-Speech")
 
-# Custom CSS for styling
-st.markdown("""
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-    }
-    .input-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-        background-color: #fff;
-        border-top: 1px solid #ddd;
-        z-index: 1000;
-        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-    }
-    .input-box {
-        width: calc(25% - 160px);
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-    }
-    .output-box {
-        border: 1px solid #d3d3d3;
-        padding: 10px;
-        background-color: #e6f7e6;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        color: black;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .input-message {
-        border: 1px solid #d3d3d3;
-        padding: 10px;
-        background-color: #ffe6e6;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        color: black;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .stop-button {
-        margin-top: 10px;
-        background-color: #ff4b4b;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .stop-button:hover {
-        background-color: #ff1f1f;
-    }
-    .send-button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-    .send-button:hover {
-        background-color: #45a049;
-    }
-    .slider-container {
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
-    .voice-dropdown {
-        margin-top: 10px;
-    }
-    .chat-history {
-        background-color: #f9f9f9;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    </style>
-""", unsafe_allow_html=True)
-
 # Initialize TTS model (do this only once)
 @st.cache_resource
 def load_tts_service():
@@ -115,9 +32,9 @@ if "show_save_input" not in st.session_state:
 if "chat_to_load" not in st.session_state:
     st.session_state["chat_to_load"] = None
 if "input_voice" not in st.session_state:
-    st.session_state["input_voice"] = None
+    st.session_state["input_voice"] = "en-US-Wavenet-D"  # Default voice
 if "output_voice" not in st.session_state:
-    st.session_state["output_voice"] = None
+    st.session_state["output_voice"] = "en-US-Wavenet-D"  # Default voice
 if "speech_rate" not in st.session_state:
     st.session_state["speech_rate"] = 130
 
@@ -201,18 +118,14 @@ def stop_generation():
 display_chat_messages()
 
 # Add voice selection dropdowns and speech rate slider
-voices = tts_service.get_voices()
-voice_options = {voice["name"]: voice["id"] for voice in voices}
+voices = [{"name": "en-US-Wavenet-I"}, {"name": "en-US-Wavenet-F"}]  # Example voices
+voice_options = {voice["name"]: voice["name"] for voice in voices}
 
 input_voice = st.selectbox("Choose Input Voice", list(voice_options.keys()), key="input_voice_selection")
 st.session_state["input_voice"] = voice_options[input_voice]
 
 output_voice = st.selectbox("Choose Output Voice", list(voice_options.keys()), key="output_voice_selection")
 st.session_state["output_voice"] = voice_options[output_voice]
-
-speech_rate = st.slider("Speech Rate", min_value=50, max_value=200, value=st.session_state["speech_rate"], key="speech_rate_slider")
-st.session_state["speech_rate"] = speech_rate
-tts_service.set_rate(st.session_state["speech_rate"])
 
 # Create a placeholder for the input box at the bottom
 input_placeholder = st.empty()
@@ -231,7 +144,7 @@ with input_placeholder.container():
                 st.markdown(f'<div class="input-message">{prompt}</div>', unsafe_allow_html=True)
 
             # Generate TTS for user's input and store it
-            user_audio_buffer = tts_service.text_to_speech(prompt, voice_id=st.session_state["input_voice"])
+            user_audio_buffer = tts_service.text_to_speech(prompt, voice_name=st.session_state["input_voice"])
             if user_audio_buffer:
                 user_audio_bytes = user_audio_buffer.read()
                 st.session_state["messages"][-1]["audio"] = base64.b64encode(user_audio_bytes).decode('utf-8')
@@ -250,7 +163,7 @@ with input_placeholder.container():
                 st.session_state["messages"].append({"role": "assistant", "content": full_response})
 
                 # Generate TTS for assistant's response and store it
-                audio_buffer = tts_service.text_to_speech(full_response, voice_id=st.session_state["output_voice"])
+                audio_buffer = tts_service.text_to_speech(full_response, voice_name=st.session_state["output_voice"])
                 if audio_buffer:
                     audio_bytes = audio_buffer.read()
                     st.session_state["messages"][-1]["audio"] = base64.b64encode(audio_bytes).decode('utf-8')

@@ -87,7 +87,7 @@ streamlit run app.py
 - Ensures continuity of the chat session across different interactions.
 
 ### Model Selection
-- Allows users to select from a list of available GPT models to interact with.
+- Allows users to select from a list of available LLM models to interact with.
 - Dynamically loads the selected model for generating responses.
 
 ### Stop Button for Response Generation
